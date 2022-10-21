@@ -28,3 +28,13 @@ function operate(x, y, operator) {
             return undefined;
     }
 }
+
+(function () {
+    let numbers = Array.from(document.querySelectorAll(".number"));
+    let display = document.querySelector("#display");
+    for(let i = 0; i < numbers.length; i++) {
+        numbers[i].addEventListener("click", e => {
+            display.textContent = numbers[i].textContent;
+        });
+    }
+})();
