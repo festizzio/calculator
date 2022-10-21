@@ -32,6 +32,7 @@ function operate(x, y, operator) {
 (function () {
     let numbers = Array.from(document.querySelectorAll(".number"));
     let display = document.querySelector("#display");
+    display.textContent = "0";
     for(let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener("click", e => {
             if(display.textContent != 0 || display.textContent.includes(".")) {
