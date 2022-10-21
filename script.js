@@ -34,7 +34,7 @@ function operate(x, y, operator) {
     let display = document.querySelector("#display");
     for(let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener("click", e => {
-            if(display.textContent != 0) {
+            if(display.textContent != 0 || display.textContent.includes(".")) {
                 let currentNum = display.textContent;
                 currentNum += numbers[i].textContent;
                 display.textContent = currentNum;
