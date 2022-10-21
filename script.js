@@ -34,7 +34,26 @@ function operate(x, y, operator) {
     let display = document.querySelector("#display");
     for(let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener("click", e => {
-            display.textContent = numbers[i].textContent;
+            if(display.textContent != 0) {
+                let currentNum = display.textContent;
+                currentNum += numbers[i].textContent;
+                display.textContent = currentNum;
+            } else {
+                display.textContent = numbers[i].textContent;
+            }
         });
     }
+
+    let dot = document.querySelector("#decimal");
+    dot.addEventListener("click", event => {
+        let displayText = display.textContent;
+        if(!displayText.includes(".")) {
+            display.textContent = displayText.concat(".");
+        }
+    });
+
+    let clear = document.querySelector("#clear");
+    clear.addEventListener("click", event => {
+        display.textContent = 0;
+    });
 })();
