@@ -57,4 +57,9 @@ function operate(x, y, operator) {
     clear.addEventListener("click", event => {
         display.textContent = 0;
     });
+
+    // When the + button is pressed, need to store the value in
+    // the display currently. The next number entered should overwrite
+    // what was already in the display, and when another operator
+    // button is pressed, add the two values together and display them
 })();
