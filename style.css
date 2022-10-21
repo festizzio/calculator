@@ -1,3 +1,28 @@
 button {
     border-radius: 10px;
+    width: 5em;
+    margin: 2px;
+    height: 5em;
+    font-size: 16px;
+}
+
+.display, .buttons {
+    width: 300px;
+}
+
+.display {
+    border: 1px solid black;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
 }
