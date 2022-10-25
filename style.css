@@ -11,19 +11,29 @@ button {
     width: 144px;
 }
 
-#display, .buttons {
+#display, #upperDisplay, .buttons {
     width: 300px;
 }
 
-#display {
+#display, #upperDisplay {
     border: 1px solid black;
+    box-sizing: border-box;
+    text-align: end;
+}
+
+#display {
     height: 60px;
     margin-bottom: 10px;
     font-size: 55px;
-    text-align: end;
     padding-right: 10px;
-    box-sizing: border-box;
+    border-top: none;
 }
+
+#upperDisplay {
+    border-bottom: none;
+    height: 10px;
+}
+
 
 .buttons {
     height: 500px;
