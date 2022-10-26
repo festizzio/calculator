@@ -20,9 +20,9 @@ function operate(x, y, operator) {
             return add(x,y);
         case "-":
             return subtract(x,y);
-        case "*":
+        case "x":
             return multiply(x,y);
-        case "/":
+        case "÷":
             return divide(x,y);
         default:
             return undefined;
@@ -32,7 +32,12 @@ function operate(x, y, operator) {
 (function () {
     let numbers = Array.from(document.querySelectorAll(".number"));
     let display = document.querySelector("#display");
+    let firstVariable = document.querySelector("#x");
+    let secondVariable = document.querySelector("#y");
+    let activeOperator = document.querySelector("#activeOperator");
+
     display.textContent = "0";
+
     for(let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener("click", e => {
             if(display.textContent != 0 || display.textContent.includes(".")) {
@@ -56,9 +61,11 @@ function operate(x, y, operator) {
     let clear = document.querySelector("#clear");
     clear.addEventListener("click", event => {
         display.textContent = 0;
+        firstVariable.textContent = "";
+        secondVariable.textContent = "";
+        activeOperator.textContent = "";
     });
 
-    let upperDisplay = document.querySelector("#upperDisplay");
 
     let operators = document.querySelectorAll(".operator");
     operators.forEach(operator => {
@@ -69,32 +76,28 @@ function operate(x, y, operator) {
 
             // Once a second number has been entered, the next operator should 
             // automatically calculate and overwrite the numbers and operator in upperDisplay.
-
-            let firstVariable = document.querySelector("#x");
-            let activeOperator = document.querySelector("#activeOperator");
-
+        
             if(display.textContent != "0") {
-                console.log("text content is not 0");
-                if(firstVariable == NaN) {
-                    console.log("firstVariable is empty");
+                if(firstVariable.textContent != "") {
+                    let result = operate(+firstVariable.textContent, 
+                        +display.textContent, operator.textContent);
+                    console.log(result);
+                    display.textContent = result;
+                } else {
                     firstVariable.textContent = display.textContent + " ";
                     activeOperator.textContent = operator.textContent;
-                
-                    // if(upperDisplay.textContent != "") {
-                    //     let upperDisplayContent = upperDisplay.textContent.split(" ");
-                    //     if(upperDisplayContent[upperDisplayContent.length - 1].match("\D")) {
-    
-                    //     } else {
-                            
-                    //     }
-                    // } else {
-                    //     upperDisplay.textContent = display.textContent + " " + 
-                    //                                 operator.textContent + " ";
-                    // }
-                    display.textContent = 0;
-                } 
+                    display.textContent = "0";
+                }
             }
         });
+    });
+
+    let equals = document.querySelector("#equals");
+    equals.addEventListener("click", e => {
+        secondVariable.textContent = display.textContent + " =";
+        display.textContent = operate(+firstVariable.textContent, +display.textContent,
+            activeOperator.textContent);
+        
     });
 
     // When the + button is pressed, need to store the value in
