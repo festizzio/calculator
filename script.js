@@ -29,24 +29,28 @@ function operate(x, y, operator) {
     }
 }
 
+// Initialize buttons
 (function () {
     let numbers = Array.from(document.querySelectorAll(".number"));
     let display = document.querySelector("#display");
     let firstVariable = document.querySelector("#x");
     let secondVariable = document.querySelector("#y");
     let activeOperator = document.querySelector("#activeOperator");
+    let lastButtonIsOperator = false;
 
     display.textContent = "0";
 
     for(let i = 0; i < numbers.length; i++) {
         numbers[i].addEventListener("click", e => {
-            if(display.textContent != 0 || display.textContent.includes(".")) {
+            if((display.textContent != 0 || display.textContent.includes(".")) &&
+                !lastButtonIsOperator) {
                 let currentNum = display.textContent;
                 currentNum += numbers[i].textContent;
                 display.textContent = currentNum;
             } else {
                 display.textContent = numbers[i].textContent;
             }
+            lastButtonIsOperator = false;
         });
     }
 
@@ -56,6 +60,7 @@ function operate(x, y, operator) {
         if(!displayText.includes(".")) {
             display.textContent = displayText.concat(".");
         }
+        lastButtonIsOperator = false;
     });
 
     let clear = document.querySelector("#clear");
@@ -64,6 +69,7 @@ function operate(x, y, operator) {
         firstVariable.textContent = "";
         secondVariable.textContent = "";
         activeOperator.textContent = "";
+        lastButtonIsOperator = false;
     });
 
 
@@ -86,9 +92,11 @@ function operate(x, y, operator) {
                 } else {
                     firstVariable.textContent = display.textContent + " ";
                     activeOperator.textContent = operator.textContent;
-                    display.textContent = "0";
+                    // display.textContent = "0";
                 }
             }
+
+            lastButtonIsOperator = true;
         });
     });
 
@@ -97,6 +105,7 @@ function operate(x, y, operator) {
         secondVariable.textContent = display.textContent + " =";
         display.textContent = operate(+firstVariable.textContent, +display.textContent,
             activeOperator.textContent);
+        lastButtonIsOperator = false;
         
     });
 
