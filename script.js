@@ -83,12 +83,12 @@ function operate(x, y, operator) {
             // Once a second number has been entered, the next operator should 
             // automatically calculate and overwrite the numbers and operator in upperDisplay.
         
-            if(display.textContent != "0") {
+            if(display.textContent != "0" && !lastButtonIsOperator) {
                 if(firstVariable.textContent != "") {
                     let result = operate(+firstVariable.textContent, 
-                        +display.textContent, operator.textContent);
-                    console.log(result);
-                    display.textContent = result;
+                        +display.textContent, activeOperator.textContent);
+                    firstVariable.textContent = result + " ";
+                    activeOperator.textContent = operator.textContent;
                 } else {
                     firstVariable.textContent = display.textContent + " ";
                     activeOperator.textContent = operator.textContent;
@@ -106,7 +106,6 @@ function operate(x, y, operator) {
         display.textContent = operate(+firstVariable.textContent, +display.textContent,
             activeOperator.textContent);
         lastButtonIsOperator = false;
-        
     });
 
     // When the + button is pressed, need to store the value in
