@@ -54,6 +54,9 @@ function operate(x, y, operator) {
         });
     }
 
+    // decimal is being added onto result instead of overwriting with 0..
+    // Also, if the result also has a decimal, then pressing decimal followed by
+    // any other numbers will concatenate them onto the end. 
     let dot = document.querySelector("#decimal");
     dot.addEventListener("click", event => {
         let displayText = display.textContent;
@@ -66,12 +69,9 @@ function operate(x, y, operator) {
     let clear = document.querySelector("#clear");
     clear.addEventListener("click", event => {
         display.textContent = 0;
-        firstVariable.textContent = "";
-        secondVariable.textContent = "";
-        activeOperator.textContent = "";
         lastButtonIsOperator = false;
+        resetVariables();
     });
-
 
     let operators = document.querySelectorAll(".operator");
     operators.forEach(operator => {
@@ -82,7 +82,7 @@ function operate(x, y, operator) {
 
             // Once a second number has been entered, the next operator should 
             // automatically calculate and overwrite the numbers and operator in upperDisplay.
-        
+            
             if(display.textContent != "0" && !lastButtonIsOperator) {
                 if(firstVariable.textContent != "") {
                     let result = operate(+firstVariable.textContent, 
@@ -105,7 +105,7 @@ function operate(x, y, operator) {
         secondVariable.textContent = display.textContent + " =";
         display.textContent = operate(+firstVariable.textContent, +display.textContent,
             activeOperator.textContent);
-        lastButtonIsOperator = false;
+        resetVariables();
     });
 
     // When the + button is pressed, need to store the value in
@@ -119,4 +119,17 @@ function operate(x, y, operator) {
     // the next number. After, we can 0 out the active number.
 
 
+    function resetVariables() {
+        firstVariable.textContent = "";
+        secondVariable.textContent = "";
+        activeOperator.textContent = "";
+    }
 })();
+
+function checkResultLength(result) {
+    if(result.length > 11) {
+        // if result is a non-decimal number, change to scientific notation
+
+        // else if result is a decimal number, round to nearest 9th decimal place
+    }
+}
