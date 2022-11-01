@@ -53,15 +53,16 @@ function operate(x, y, operator) {
             lastButtonIsOperator = false;
         });
     }
-
-    // decimal is being added onto result instead of overwriting with 0..
-    // Also, if the result also has a decimal, then pressing decimal followed by
-    // any other numbers will concatenate them onto the end. 
+ 
     let dot = document.querySelector("#decimal");
     dot.addEventListener("click", event => {
         let displayText = display.textContent;
-        if(!displayText.includes(".")) {
-            display.textContent = displayText.concat(".");
+        if(!lastButtonIsOperator) {
+            if(!displayText.includes(".")) {
+                display.textContent = displayText.concat(".");
+            }    
+        } else {
+            display.textContent = "0.";
         }
         lastButtonIsOperator = false;
     });
@@ -92,7 +93,6 @@ function operate(x, y, operator) {
                 } else {
                     firstVariable.textContent = display.textContent + " ";
                     activeOperator.textContent = operator.textContent;
-                    // display.textContent = "0";
                 }
             }
 
@@ -108,28 +108,18 @@ function operate(x, y, operator) {
         resetVariables();
     });
 
-    // When the + button is pressed, need to store the value in
-    // the display currently. The next number entered should overwrite
-    // what was already in the display, and when another operator
-    // button is pressed, add the two values together and display them
-
-    // Add super script (another row of text) in the display, above the
-    // currently active value along with whatever operator was entered.
-    // Operator can change if user presses another operator button before
-    // the next number. After, we can 0 out the active number.
-
-
     function resetVariables() {
         firstVariable.textContent = "";
         secondVariable.textContent = "";
         activeOperator.textContent = "";
     }
-})();
 
-function checkResultLength(result) {
-    if(result.length > 11) {
-        // if result is a non-decimal number, change to scientific notation
 
-        // else if result is a decimal number, round to nearest 9th decimal place
+    function checkResultLength(result) {
+        if(result.length > 11) {
+            // if result is a non-decimal number, change to scientific notation
+            
+            // else if result is a decimal number, round to nearest 9th decimal place
+        }
     }
-}
+})();
