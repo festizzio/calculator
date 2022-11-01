@@ -24,6 +24,8 @@ function operate(x, y, operator) {
             return multiply(x,y);
         case "÷":
             return divide(x,y);
+        case "%":
+            return multiply(x, y/100);
         default:
             return undefined;
     }
@@ -94,6 +96,10 @@ function operate(x, y, operator) {
                     firstVariable.textContent = display.textContent + " ";
                     activeOperator.textContent = operator.textContent;
                 }
+            }
+
+            if(lastButtonIsOperator) {
+                activeOperator.textContent = operator.textContent;
             }
 
             lastButtonIsOperator = true;
