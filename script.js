@@ -86,22 +86,18 @@ function operate(x, y, operator) {
             // Once a second number has been entered, the next operator should 
             // automatically calculate and overwrite the numbers and operator in upperDisplay.
             
-            if(display.textContent != "0" && !lastButtonIsOperator) {
+            if(!lastButtonIsOperator) {
                 if(firstVariable.textContent != "") {
                     let result = operate(+firstVariable.textContent, 
                         +display.textContent, activeOperator.textContent);
                     firstVariable.textContent = result + " ";
-                    activeOperator.textContent = operator.textContent;
+                    display.textContent = result;
                 } else {
                     firstVariable.textContent = display.textContent + " ";
-                    activeOperator.textContent = operator.textContent;
                 }
             }
 
-            if(lastButtonIsOperator) {
-                activeOperator.textContent = operator.textContent;
-            }
-
+            activeOperator.textContent = operator.textContent;
             lastButtonIsOperator = true;
         });
     });
