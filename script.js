@@ -108,6 +108,15 @@ function operate(x, y, operator) {
         resetVariables();
     });
 
+    let negative = document.querySelector("#negative");
+    negative.addEventListener("click", e => {
+        if(display.textContent != "0") {
+            let displayNumber = Number(display.textContent);
+            displayNumber *= -1;
+            display.textContent = displayNumber;
+        } 
+    });
+
     function resetVariables() {
         firstVariable.textContent = "";
         secondVariable.textContent = "";
